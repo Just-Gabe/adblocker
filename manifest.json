@@ -1,0 +1,40 @@
+{
+    "manifest_version": 2,
+    "name": "adblock",
+    "version": "1.0",
+    "description": "Bloqueia tudo sem dó",
+    "icons": {
+        "48": "icons/border-48.png"
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "adblock@mozilla.org",
+            "data_collection_permissions": {
+                "required": [
+                    "none"
+                ]
+            }
+        }
+    },
+    "permissions": [
+        "webRequest",
+        "webRequestBlocking",
+        "<all_urls>"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "adblock.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}
