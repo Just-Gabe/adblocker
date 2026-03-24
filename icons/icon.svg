@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Cadeado -->
+  <rect x="20" y="28" width="24" height="28" rx="4" ry="4" fill="#555" stroke="#333" stroke-width="2"></rect>
+  <path d="M28 28v-8a8 8 0 0 1 16 0v8" fill="none" stroke="#333" stroke-width="2"></path>
+  
+  <!-- Chamas estilizadas -->
+  <path d="M32 20c2-4 6-6 6-10 0 4 4 6 4 10s-4 6-4 10c0-4-4-6-6-10z" fill="orange"></path>
+  <path d="M32 20c1-3 4-4 4-7 0 3 3 4 3 7s-3 4-3 7c0-3-3-4-4-7z" fill="red"></path>
+  <path d="M32 20c0-2 2-3 2-5 0 2 2 3 2 5s-2 3-2 5c0-2-2-3-2-5z" fill="yellow"></path>
+</svg>

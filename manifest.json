@@ -4,11 +4,11 @@
     "version": "1.0",
     "description": "Bloqueia tudo sem dó",
     "icons": {
-        "48": "icons/border-48.png"
+        "48": "icons/icon.svg"
     },
     "browser_specific_settings": {
         "gecko": {
-            "id": "adblock@mozilla.org",
+            "id": "allblocker@mozilla.org",
             "data_collection_permissions": {
                 "required": [
                     "none"
