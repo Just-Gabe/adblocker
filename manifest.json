@@ -29,12 +29,23 @@
     "content_scripts": [
         {
             "matches": [
-                "<all_urls>"
+                "*://facebook.com/*",
+                "*://*.facebook.com/*",
+                "*://reddit.com/*",
+                "*://*.reddit.com/*",
+                "*://instagram.com/*",
+                "*://*.instagram.com/*",
+                "*://twitter.com/*",
+                "*://*.twitter.com/*",
+                "*://*.bbc.com/*",
+                "*://*.cnn.com/*",
+                "*://*.wordpress.com/*",
+                "*://*.blogspot.com/*"
             ],
             "js": [
                 "adblock.js"
             ],
-            "run_at": "document_idle"
+            "run_at": "document_start"
         }
     ]
 }

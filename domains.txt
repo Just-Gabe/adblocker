@@ -48,7 +48,6 @@ sdk.iad-06.braze.com
 ads-eu.amillionads.com
 ad.mopub.com
 engine.fyber.com
-googlevideo.com
 /pagead/
 
 # Cydia/Bigboss
@@ -71765,4 +71764,3 @@ rt.udmserve.net
 www.stickylogic.com
 www.winadiscount.com
 www.winaproduct.com
-googlevideo.com

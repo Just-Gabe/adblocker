@@ -1,10 +1,12 @@
+
 let blockedDomainsSet = new Set();
 let blockedPatterns = [];
+let blockedPatternRegex = null;
 
 const cache = new Map();
 const MAX_CACHE = 5000;
 
-const DEBUG = false;
+const DEBUG = false; // Ativar logs detalhados para desenvolvimento
 
 async function loadBlocklist() {
     try {
@@ -29,6 +31,12 @@ async function loadBlocklist() {
                 }
             });
 
+        // Compilar regex uma única vez ao carregar
+        if (blockedPatterns.length > 0) {
+            const escapedPatterns = blockedPatterns.map(p => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+            blockedPatternRegex = new RegExp(escapedPatterns.join('|'));
+        }
+
         if (DEBUG) {
             console.log(`Blocklist carregada: ${blockedDomainsSet.size} domínios, ${blockedPatterns.length} padrões de URL`);
         }
@@ -48,26 +56,25 @@ function extractHostname(url) {
     let end = url.indexOf("/", start);
     if (end === -1) end = url.length;
 
-    return url.substring(start, end).toLowerCase();
+    return url.substring(start, end);
 }
 
 function isBlocked(hostname, fullUrl) {
-    // Verificar padrões de URL primeiro (mais específicos)
-    for (let pattern of blockedPatterns) {
-        if (fullUrl.includes(pattern)) {
-            return true;
-        }
+    // Verificar padrões de URL com regex compilado (muito mais rápido)
+    if (blockedPatternRegex && blockedPatternRegex.test(fullUrl)) {
+        return true;
     }
 
     // Depois verificar domínios
     let dotIndex = 0;
+    const hostnameLower = hostname.toLowerCase();
 
     while (true) {
-        if (blockedDomainsSet.has(hostname.substring(dotIndex))) {
+        if (blockedDomainsSet.has(hostnameLower.substring(dotIndex))) {
             return true;
         }
 
-        dotIndex = hostname.indexOf('.', dotIndex);
+        dotIndex = hostnameLower.indexOf('.', dotIndex);
         if (dotIndex === -1) break;
 
         dotIndex++;
@@ -85,14 +92,13 @@ function checkUrl(url) {
 
     if (!hostname) return;
     
-    const urlLower = url.toLowerCase();
-    const result = isBlocked(hostname, urlLower) ? { cancel: true } : {};
-    if (result.cancel) {
-        console.log("Bloqueado: ", url)
-    } else {
-        if (DEBUG) {
-            console.log("Permitido: ", hostname)
-            }
+    const result = isBlocked(hostname, url) ? { cancel: true } : {};
+    if (DEBUG) {
+        if (result.cancel) {
+            console.log("Bloqueado: ", url)
+        } else {
+            // console.log("Permitido: ", url)
+        }
     }
 
     cache.set(url, result);
