@@ -165,10 +165,12 @@ const adSelectors = [
     "[style*='display: block;'][class*='AD']",
     "[class*='*ad*']",
     "[class*='yt-lockup-view-model_content-image'][href*='*://www.googleadservices.com/*']",
+    ".video-ads",
+    ".ad-simple-attributed-string"
 ];
 
 let throttleTimeout = null;
-const THROTTLE_DELAY = 1000; // 1 segundo
+const THROTTLE_DELAY = 3000; //
 
 function removeAds() {
     let removed = 0;

@@ -6,8 +6,9 @@ let blockedPatternRegex = null;
 const cache = new Map();
 const MAX_CACHE = 5000;
 
-const DEBUG = true; // Ativar logs detalhados para desenvolvimento
+const DEBUG = false; // Ativar logs detalhados para desenvolvimento
 
+console.log("Iniciando AllBlocker...");
 async function loadBlocklist() {
     try {
         if (DEBUG) console.log("Carregando blocklist...");
@@ -37,9 +38,9 @@ async function loadBlocklist() {
             blockedPatternRegex = new RegExp(escapedPatterns.join('|'));
         }
 
-        if (DEBUG) {
-            console.log(`Blocklist carregada: ${blockedDomainsSet.size} domínios, ${blockedPatterns.length} padrões de URL`);
-        }
+
+        console.log(`Blocklist carregada: ${blockedDomainsSet.size} domínios, ${blockedPatterns.length} padrões de URL`);
+
 
     } catch (err) {
         console.error("Erro ao carregar blocklist:", err);
@@ -101,7 +102,7 @@ function checkUrl(url) {
         if (result.cancel) {
             console.log("Bloqueado: ", url)
         } else {
-            // console.log("Permitido: ", url)
+            console.log("Permitido: ", url)
         }
     }
 
@@ -121,7 +122,7 @@ browser.webRequest.onBeforeRequest.addListener(
         try {
             return checkUrl(details.url);
         } catch (e) {
-            if (DEBUG) console.log("Erro:", e);
+            console.warn("Erro:", e);
         }
     },
     { urls: ["<all_urls>"] },
