@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "AllBlocker",
-    "version": "1.0",
+    "version": "1.0.1",
     "description": "Bloqueia tudo sem dó",
     "icons": {
         "48": "icons/icon.svg"
